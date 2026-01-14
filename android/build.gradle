@@ -25,12 +25,8 @@ android {
 repositories {
     mavenCentral()
 
-    repositories {
-    mavenCentral()
-
     flatDir {
             dirs "${rootProject.projectDir}/app/libs"
-        }
     }
 
 }
