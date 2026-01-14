@@ -1,51 +1,44 @@
-static String safePackageName(String prop) {
-    prop.replace("-lts", "")
-}
+apply plugin: "com.android.library"
 
-static String safePackageVersion(String prop, String version, String ltsVersion) {
-    prop.contains("-lts") ? ltsVersion + ".LTS" : version
-}
-
-String safeExtGet(String prop, String fallback) {
-    rootProject.ext.has(prop) ? rootProject.ext.get(prop) : fallback
-}
-
-apply plugin: 'com.android.library'
-
-buildscript {
-    repositories {
-        jcenter()
-        maven { url 'https://maven.google.com' }
-    }
-
-    dependencies {
-        classpath 'com.android.tools.build:gradle:4.0.1'
-    }
+def safeExtGet(prop, fallback) {
+    return rootProject.ext.has(prop) ? rootProject.ext.get(prop) : fallback
 }
 
 android {
-    compileSdkVersion 29
+    namespace "com.arthenica.reactnative.ffmpeg"
+
+    compileSdkVersion safeExtGet("compileSdkVersion", 36)
 
     defaultConfig {
-        minSdkVersion safeExtGet('reactNativeFFmpegPackage', 'https').contains("-lts") ? 16 : 24
-        targetSdkVersion 29
+        minSdkVersion 24
+        targetSdkVersion safeExtGet("targetSdkVersion", 36)
         versionCode 52
         versionName "0.5.2"
-        project.archivesBaseName = "react-native-ffmpeg"
+        consumerProguardFiles "proguard-rules.pro"
     }
-    lintOptions {
+
+    lint {
         abortOnError false
     }
 }
 
 repositories {
-    maven { url "$rootDir/node_modules/react-native/android" }
     mavenCentral()
-    jcenter()
-    maven { url 'https://maven.google.com' }
+
+    repositories {
+    mavenCentral()
+
+    flatDir {
+            dirs "${rootProject.projectDir}/app/libs"
+        }
+    }
+
 }
 
 dependencies {
-    implementation 'com.arthenica:mobile-ffmpeg-' + safePackageName(safeExtGet('reactNativeFFmpegPackage', 'https')) + ':' + safePackageVersion(safeExtGet('reactNativeFFmpegPackage', 'https'), safeExtGet('mobileFFmpegVersion', '4.4'), safeExtGet('mobileFFmpegVersion', '4.4'))
-    implementation 'com.facebook.react:react-native:+'
+    // React Native
+    implementation("com.facebook.react:react-android")
+
+    // ✅ LOCAL mobile-ffmpeg AAR (from app/libs)
+    implementation(name: "mobile-ffmpeg", ext: "aar")
 }
