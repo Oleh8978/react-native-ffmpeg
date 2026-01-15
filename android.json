@@ -4,5 +4,6 @@
       "sourceDir": "android"
     }
   },
-  "dependencies": {}
+  "dependencies": {},
+  "commands": {}
 }
