@@ -29,5 +29,11 @@
   "peerDependencies": {
     "react": "*",
     "react-native": "*"
+  },
+  "rnpm": {
+    "android": {
+      "packageName": "com.arthenica.reactnative.ffmpeg",
+      "packageInstance": "new RNFFmpegPackage()"
+    }
   }
 }
