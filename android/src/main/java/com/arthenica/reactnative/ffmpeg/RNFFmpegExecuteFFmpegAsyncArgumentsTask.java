@@ -17,20 +17,20 @@
  * along with ReactNativeFFmpeg.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package com.arthenica.reactnative;
+package com.arthenica.reactnative.ffmpeg;
 
 import android.os.AsyncTask;
 
-import com.arthenica.mobileffmpeg.FFprobe;
+import com.arthenica.mobileffmpeg.FFmpeg;
 import com.facebook.react.bridge.Promise;
 import com.facebook.react.bridge.ReadableArray;
 
-public class RNFFmpegExecuteFFprobeAsyncArgumentsTask extends AsyncTask<String, Integer, Integer> {
+public class RNFFmpegExecuteFFmpegAsyncArgumentsTask extends AsyncTask<String, Integer, Integer> {
 
     private final Promise promise;
     private final String[] argumentsArray;
 
-    RNFFmpegExecuteFFprobeAsyncArgumentsTask(final Promise promise, final ReadableArray... readableArrays) {
+    RNFFmpegExecuteFFmpegAsyncArgumentsTask(final Promise promise, final ReadableArray... readableArrays) {
         this.promise = promise;
 
         /* PREPARING ARGUMENTS */
@@ -43,7 +43,7 @@ public class RNFFmpegExecuteFFprobeAsyncArgumentsTask extends AsyncTask<String, 
 
     @Override
     protected Integer doInBackground(final String... unusedArgs) {
-        return FFprobe.execute(argumentsArray);
+        return FFmpeg.execute(argumentsArray);
     }
 
     @Override

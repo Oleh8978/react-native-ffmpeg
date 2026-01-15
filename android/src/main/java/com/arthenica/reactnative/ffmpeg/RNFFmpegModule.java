@@ -17,7 +17,7 @@
  * along with ReactNativeFFmpeg.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package com.arthenica.reactnative;
+package com.arthenica.reactnative.ffmpeg;
 
 import android.os.AsyncTask;
 import android.util.Log;
@@ -463,15 +463,3 @@ public class RNFFmpegModule extends ReactContextBaseJavaModule {
     }
 
 }
-
-
-
-
-
-
-
-
-
-
-
-
