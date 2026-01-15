@@ -17,38 +17,32 @@
  * along with ReactNativeFFmpeg.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package com.arthenica.reactnative;
+package com.arthenica.reactnative.ffmpeg;
 
 import android.os.AsyncTask;
 
-import com.arthenica.mobileffmpeg.FFmpeg;
+import com.arthenica.mobileffmpeg.FFprobe;
+import com.arthenica.mobileffmpeg.MediaInformation;
 import com.facebook.react.bridge.Promise;
-import com.facebook.react.bridge.ReadableArray;
 
-public class RNFFmpegExecuteFFmpegAsyncArgumentsTask extends AsyncTask<String, Integer, Integer> {
+public class RNFFmpegGetMediaInformationAsyncTask extends AsyncTask<String, Integer, MediaInformation> {
 
+    private final String path;
     private final Promise promise;
-    private final String[] argumentsArray;
 
-    RNFFmpegExecuteFFmpegAsyncArgumentsTask(final Promise promise, final ReadableArray... readableArrays) {
+    RNFFmpegGetMediaInformationAsyncTask(final String path, final Promise promise) {
+        this.path = path;
         this.promise = promise;
-
-        /* PREPARING ARGUMENTS */
-        if ((readableArrays != null) && (readableArrays.length > 0)) {
-            this.argumentsArray = RNFFmpegModule.toArgumentsArray(readableArrays[0]);
-        } else {
-            this.argumentsArray = new String[0];
-        }
     }
 
     @Override
-    protected Integer doInBackground(final String... unusedArgs) {
-        return FFmpeg.execute(argumentsArray);
+    protected MediaInformation doInBackground(final String... unusedArgs) {
+        return FFprobe.getMediaInformation(path);
     }
 
     @Override
-    protected void onPostExecute(final Integer rc) {
-        promise.resolve(rc);
+    protected void onPostExecute(final MediaInformation mediaInformation) {
+        promise.resolve(RNFFmpegModule.toMediaInformationMap(mediaInformation));
     }
 
 }

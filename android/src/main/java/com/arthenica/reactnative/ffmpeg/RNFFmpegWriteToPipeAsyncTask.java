@@ -17,7 +17,7 @@
  * along with ReactNativeFFmpeg.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package com.arthenica.reactnative;
+package com.arthenica.reactnative.ffmpeg;
 
 import android.os.AsyncTask;
 import android.util.Log;
@@ -26,7 +26,7 @@ import com.facebook.react.bridge.Promise;
 
 import java.io.IOException;
 
-import static com.arthenica.reactnative.RNFFmpegModule.LIBRARY_NAME;
+import static com.arthenica.reactnative.ffmpeg.RNFFmpegModule.LIBRARY_NAME;
 
 public class RNFFmpegWriteToPipeAsyncTask extends AsyncTask<String, Integer, Integer> {
 

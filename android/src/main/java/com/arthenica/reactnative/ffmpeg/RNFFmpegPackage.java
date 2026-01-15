@@ -17,7 +17,7 @@
  * along with ReactNativeFFmpeg.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package com.arthenica.reactnative;
+package com.arthenica.reactnative.ffmpeg;
 
 import com.facebook.react.ReactPackage;
 import com.facebook.react.bridge.JavaScriptModule;
